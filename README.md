@@ -29,5 +29,10 @@ pip install -r requirements.txt
 Our popular Free Plan provides hourly updates (with base currency USD) and up to 1,000 requests/month.
 Use https://docs.openexchangerates.org/reference/authentication to get App ID
 
+## freecurrencyapi сервис
+Дока - https://freecurrencyapi.com/docs/
+Для подключения нужен apikey, бесплатный тариф имеет ограничения  
+5k Free Monthly Requests + 32 World Currencies + All exchange rates are updated on a daily basis.
+
 ### How to use?
 Go to external_currency\example.py -> Run

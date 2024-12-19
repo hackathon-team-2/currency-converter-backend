@@ -1,4 +1,6 @@
-from currency import convert
+from openexchangerates import convert as oconvert
+from freecurrencyapi import convert as fconvert
 
 params = 'RUB', 'USD', 1000
-print(convert(*params))
+print(oconvert(*params))
+print(fconvert(*params))
