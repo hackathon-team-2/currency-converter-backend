@@ -13,7 +13,7 @@ git clone #АКТУАЛЬНАЯ ССЫЛКА
 
 ```bash
 python -m venv venv
-source venv/Scripts/activate
+. venv/Scripts/activate
 python -m pip install --upgrade pip
 pip install -r requirements.txt  
 
@@ -28,3 +28,6 @@ pip install -r requirements.txt
 Для подключения нужен app_id, бесплатный тариф имеет ограничения  
 Our popular Free Plan provides hourly updates (with base currency USD) and up to 1,000 requests/month.
 Use https://docs.openexchangerates.org/reference/authentication to get App ID
+
+### How to use?
+Go to external_currency\example.py -> Run
