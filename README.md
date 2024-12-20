@@ -23,12 +23,6 @@ pip install -r requirements.txt
 ## Конфиг для логирования
 \external_currency\config.py
 
-## openexchangerates сервис
-Дока - https://docs.openexchangerates.org/reference/api-introduction
-Для подключения нужен app_id, бесплатный тариф имеет ограничения  
-Our popular Free Plan provides hourly updates (with base currency USD) and up to 1,000 requests/month.
-Use https://docs.openexchangerates.org/reference/authentication to get App ID
-
 ## freecurrencyapi сервис
 Дока - https://freecurrencyapi.com/docs/
 Для подключения нужен apikey, бесплатный тариф имеет ограничения  
