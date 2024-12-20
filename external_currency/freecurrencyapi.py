@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import os
 from http import HTTPStatus
 import requests
+from typing import Union
 
 from config import logger
 
@@ -31,19 +32,21 @@ def get_api_answer(endpoint: str) -> dict:
             headers=HEADERS,
         )
         if response.status_code != HTTPStatus.OK:
-            logger.error('Это не 200')
-            raise Exception('Неуспешно')
-    except requests.RequestException:
-        logger.error('Ошибка запроса')
+            error_message = f'Ошибка: статус ответа = {response.status_code}'
+            logger.error(error_message)
+            raise Exception(error_message)
+    except requests.RequestException as e:
+        logger.error(f'Ошибка: попытка запроса = {e}')
 
     try:
         return response.json()
-    except ValueError:
-        logger.error('Where is json format?')
-        raise Exception('Where is json format?')
+    except requests.exceptions.JSONDecodeError as e:
+        error_message = f'Ошибка: формат ответа = {e}'
+        logger.error(error_message)
+        raise Exception(error_message)
 
 
-def convert(out: str, to: str, value) -> Decimal:
+def convert(out: str, to: str, value: Union[int, float]) -> Decimal:
     """Конвертирует по текущему курсу."""
     rates = get_api_answer('latest')['data']
     if out not in rates:
