@@ -7,7 +7,7 @@ from http import HTTPStatus
 import requests
 from typing import Union
 
-from config import logger
+from external_currency.config import logger
 
 load_dotenv()
 

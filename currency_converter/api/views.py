@@ -1,9 +1,9 @@
-import json
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from api.serializers import CurrencySerializer
+
+from external_currency.freecurrencyapi import convert
 
 
 class CurrencyView(APIView):
@@ -17,4 +17,9 @@ class CurrencyView(APIView):
                 }
         )
         serializer.is_valid(raise_exception=True)
-        return Response({'data': request.query_params})
+        result = convert(
+            request.query_params['from'],
+            request.query_params['to'],
+            request.query_params['amount'],
+        )
+        return Response({'data': result})
