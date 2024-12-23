@@ -3,7 +3,6 @@ from drf_spectacular.views import (
     SpectacularRedocView,
     SpectacularSwaggerView
 )
-
 from django.contrib import admin
 from django.urls import include, path
 

@@ -1,3 +1,8 @@
+from drf_spectacular.utils import (
+    extend_schema,
+    extend_schema_view,
+    OpenApiParameter,
+)
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -5,6 +10,24 @@ from api.external_currency.freecurrencyapi import convert
 from api.serializers import CurrencySerializer
 
 
+@extend_schema_view(
+    get=extend_schema(
+        parameters=[
+            OpenApiParameter(
+                name='from',
+                description='Валюта для конвертации',
+                type=str),
+            OpenApiParameter(
+                name='to',
+                description='Итоговая валюта ',
+                type=str),
+            OpenApiParameter(
+                name='amount',
+                description='Количество ',
+                type=float),
+        ]
+    )
+)
 class CurrencyView(APIView):
     """
     Представление для обработки запроса:
