@@ -6,6 +6,14 @@ from api.serializers import CurrencySerializer
 
 
 class CurrencyView(APIView):
+    """
+    Представление для обработки запроса:
+    - используется базовый APIView
+    - разрешён только get-метод
+    - параметры для проверки передаются в сериализатор в контексте
+    - после вызывается функция утилиты freecurrencyapi
+    - результат выдаётся по формату: параметры запроса, результат
+    """
 
     def get(self, request, *args, **kwargs):
         serializer = CurrencySerializer(
