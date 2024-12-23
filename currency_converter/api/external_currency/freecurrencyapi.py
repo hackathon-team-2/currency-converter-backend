@@ -1,13 +1,13 @@
 """Модуль для работы с freecurrencyapi сервисом."""
 
-from decimal import Decimal
-from dotenv import load_dotenv
 import os
+from decimal import Decimal
 from http import HTTPStatus
-import requests
 from typing import Union
 
+import requests
 from api.external_currency.config import logger
+from dotenv import load_dotenv
 
 load_dotenv()
 

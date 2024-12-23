@@ -1,6 +1,6 @@
-from rest_framework import serializers
-
 from typing import Union
+
+from rest_framework import serializers
 
 from api.constants import AVAILABLE_CURRENCY
 
