@@ -22,4 +22,9 @@ class CurrencyView(APIView):
             request.query_params['to'],
             request.query_params['amount'],
         )
-        return Response({'data': result})
+        return Response(
+            {
+                'query': request.query_params,
+                'result': result
+            }
+        )
