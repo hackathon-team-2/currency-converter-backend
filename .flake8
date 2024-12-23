@@ -1,9 +1,0 @@
-[flake8]
-max-line-length = 79
-exclude = 
-    .git,
-    env,
-    venv
-    __pycache__,
-    migrations,
-    tests/*
