@@ -24,20 +24,20 @@ class CurrencySerializer(serializers.Serializer):
         amount = self.context['params'].get('amount')
         # проверяем наличие параметра: валюта из
         if not out:
-            raise serializers.ValidationError('Введите валюту "из"')
+            raise serializers.ValidationError('Введите параметр from')
         # проверяем значение: валюта
         if message := self.check_currency(out):
             raise serializers.ValidationError(message)
         # проверяем наличие параметра: валюта в
         if not to:
-            raise serializers.ValidationError('Введите валюту "в"')
+            raise serializers.ValidationError('Введите параметр to')
         # проверяем значение: валюта
         if message := self.check_currency(to):
             raise serializers.ValidationError(message)
         # проверяем наличие параметра: кол-во
         if not amount:
-            raise serializers.ValidationError('Введите количество')
+            raise serializers.ValidationError('Введите параметр amount')
         # проверяем тип = число
         if not (amount.replace('.', '', 1)).isdigit():
-            raise serializers.ValidationError('Проверьте тип количества')
+            raise serializers.ValidationError('Количество должно быть числом')
         return data
