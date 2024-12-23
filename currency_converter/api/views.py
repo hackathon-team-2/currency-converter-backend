@@ -18,8 +18,8 @@ class CurrencyView(APIView):
         )
         serializer.is_valid(raise_exception=True)
         result = convert(
-            request.query_params['from'],
-            request.query_params['to'],
+            request.query_params['from'].upper(),
+            request.query_params['to'].upper(),
             request.query_params['amount'],
         )
         return Response(
