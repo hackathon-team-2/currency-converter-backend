@@ -6,8 +6,9 @@ from http import HTTPStatus
 from typing import Union
 
 import requests
-from api.external_currency.config import logger
 from dotenv import load_dotenv
+
+from api.external_currency.config import logger
 
 load_dotenv()
 
