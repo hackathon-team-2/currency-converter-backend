@@ -1,9 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+from api.external_currency.freecurrencyapi import convert
 from api.serializers import CurrencySerializer
-
-from external_currency.freecurrencyapi import convert
 
 
 class CurrencyView(APIView):

@@ -7,7 +7,7 @@ from http import HTTPStatus
 import requests
 from typing import Union
 
-from external_currency.config import logger
+from api.external_currency.config import logger
 
 load_dotenv()
 
@@ -58,9 +58,3 @@ def convert(out: str, to: str, value: Union[int, float]) -> Decimal:
         logger.error(error_message)
         raise Exception(error_message)
     return Decimal(rates.get(to)) / Decimal(rates.get(out)) * Decimal(value)
-
-
-if __name__ == '__main__':
-    # For example
-    result = convert('RUB', 'EUR', 10000)
-    print(result)
