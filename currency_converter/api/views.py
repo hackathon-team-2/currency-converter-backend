@@ -1,10 +1,7 @@
-from drf_spectacular.utils import (
-    extend_schema,
-    extend_schema_view,
-    OpenApiParameter,
-)
-from rest_framework.response import Response
+from drf_spectacular.utils import (OpenApiParameter, extend_schema,
+                                   extend_schema_view)
 from rest_framework import status
+from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from api.external_currency.freecurrencyapi import convert
