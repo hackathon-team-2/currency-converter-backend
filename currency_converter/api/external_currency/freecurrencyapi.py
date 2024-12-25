@@ -47,6 +47,12 @@ def get_api_answer(endpoint: str) -> dict:
         raise Exception(error_message)
 
 
+def get_decimal(out: Union[int, float], to: Union[int, float],
+                value: Union[int, float]) -> Decimal:
+    """Производит расчет стоимости валюты."""
+    return Decimal(to) / Decimal(out) * Decimal(value)
+
+
 def convert(out: str, to: str, value: Union[int, float]) -> Decimal:
     """Конвертирует по текущему курсу."""
     rates = get_api_answer('latest')['data']
@@ -58,4 +64,4 @@ def convert(out: str, to: str, value: Union[int, float]) -> Decimal:
         error_message = f'Нет валюты {to}'
         logger.error(error_message)
         raise Exception(error_message)
-    return Decimal(rates.get(to)) / Decimal(rates.get(out)) * Decimal(value)
+    return get_decimal(rates.get(to), rates.get(out), value)
