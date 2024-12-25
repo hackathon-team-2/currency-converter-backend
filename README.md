@@ -27,7 +27,7 @@ git clone https://github.com/hackathon-team-2/currency-converter-backend.git
 APIKEY-токен можно получить здесь - https://freecurrencyapi.com/                
 Учтите, что DB_HOST в .env должен совпадать с названием сервиса postgres_db в docker-compose
 
-3. В терминал для запуска выполните команды:
+3. В терминал для запуска выполните команду:
 
 ```bash
 docker compose up --build  
@@ -40,7 +40,7 @@ docker compose exec backend python manage.py collectstatic
 docker compose exec backend cp -r /app/collected_static/. /backend_static/static/ 
 ```
 
-5. Для создания админа выполните командe:
+5. Для создания админа выполните команду:
 ```
 docker compose exec backend python manage.py createsuperuser
 ```
