@@ -38,7 +38,7 @@ docker compose up --build
 ```
 docker compose exec backend python manage.py migrate
 docker compose exec backend python manage.py collectstatic
-docker compose exec backend cp -r /app/collected_static/. /backend_static/static/ 
+docker compose exec backend sh -c 'cp -r /app/collected_static/. /backend_static/static/'
 ```
 
 5. Для создания админа выполните команду:
@@ -49,7 +49,7 @@ docker compose exec backend python manage.py createsuperuser
 6. Проект станет доступен по ссылке http://127.0.0.1:8000/api/convert/?from=USD&to=EUR&amount=1000  
 <img src="screens/drf_interface.png" alt="drf_interface" style="float: left; margin-right: 10px;" />
 
-7. Подробное описание станет доступно по ссылке http://127.0.0.1:8000/api/schema/swagger-ui/  
+7. Подробное описание станет доступно по ссылке http://127.0.0.1:8000/schema/swagger-ui/  
 <img src="screens/swagger_interface.png" alt="swagger_interface" style="float: left; margin-right: 10px;" />
 
 8. Админка станет доступна по адресу http://127.0.0.1:8000/admin/
