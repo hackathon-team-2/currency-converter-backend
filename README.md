@@ -18,32 +18,41 @@ Python + Django REST Framework + drf-spectacular + Redis + Celery + Nginx + Dock
 
 
 
-## Запуск проекта
+## Локальный запуск проекта
 1. Склонируйте проекта с git-репозитория 
 ```bash
 git clone https://github.com/hackathon-team-2/currency-converter-backend.git
 ```
 2. Используйте .env.example и сделайте свой .env. 
-APIKEY-токен можно получить здесь - https://freecurrencyapi.com/
+APIKEY-токен можно получить здесь - https://freecurrencyapi.com/                
+Учтите, что DB_HOST в .env должен совпадать с названием сервиса postgres_db в docker-compose
 
-3. В терминал последовательно выполните команды:
+3. В терминал для запуска выполните команды:
 
 ```bash
-python -m venv venv
-. venv/Scripts/activate
-python -m pip install --upgrade pip
-pip install -r requirements.txt  
-cd currency_converter  
-python manage.py migrate  
-python manage.py runserver  
+docker compose up --build  
 ```
 
-4. Проект станет доступен по ссылке http://127.0.0.1:8000/convert/?from=USD&to=EUR&amount=1000  
-![drf_interface](https://github.com/hackathon-team-2/currency-converter-backend/blob/main/drf_interface.png)
+4. В отдельном терминале из корневой директории проекта выполните команды:
+```
+docker compose exec backend python manage.py migrate
+docker compose exec backend python manage.py collectstatic
+docker compose exec backend cp -r /app/collected_static/. /backend_static/static/ 
+```
 
+5. Для создания админа выполните командe:
+```
+docker compose exec backend python manage.py createsuperuser
+```
 
-5. Подробное описание станет доступно по ссылке http://127.0.0.1:8000/api/schema/swagger-ui/  
-![swagger_interface](https://github.com/hackathon-team-2/currency-converter-backend/blob/main/swagger_interface.png)
+6. Проект станет доступен по ссылке http://127.0.0.1:8000/api/convert/?from=USD&to=EUR&amount=1000  
+<img src="screens/drf_interface.png" alt="drf_interface" style="float: left; margin-right: 10px;" />
+
+7. Подробное описание станет доступно по ссылке http://127.0.0.1:8000/api/schema/swagger-ui/  
+<img src="screens/swagger_interface.png" alt="swagger_interface" style="float: left; margin-right: 10px;" />
+
+8. Админка станет доступна по адресу http://127.0.0.1:8000/admin/
+
 
 ## Структура проекта
 
@@ -53,7 +62,7 @@ python manage.py runserver
 
 Запрос:  
 ```python
-http://127.0.0.1:8000/convert/?from=USD&to=RUB&amount=25000
+http://127.0.0.1:8000/api/convert?from=USD&to=RUB&amount=25000
 ```
   
 Ответ:  
@@ -68,11 +77,11 @@ http://127.0.0.1:8000/convert/?from=USD&to=RUB&amount=25000
 }  
 ```
 Примеры для тестирования сервиса:  
-http://127.0.0.1:8000/convert?from=USD&to=EUR&amount=100  
-http://127.0.0.1:8000/convert?from=rub&to=USD&amount=100  
-http://127.0.0.1:8000/convert?from=RUB&to=eur&amount=100  
-http://127.0.0.1:8000/convert?from=rub&to=qqq&amount=100  
-http://127.0.0.1:8000/convert?from=RUB&to=qqq&amount=100 
+http://127.0.0.1:8000/api/convert?from=USD&to=EUR&amount=100  
+http://127.0.0.1:8000/api/convert?from=rub&to=USD&amount=100  
+http://127.0.0.1:8000/api/convert?from=RUB&to=eur&amount=100  
+http://127.0.0.1:8000/api/convert?from=rub&to=qqq&amount=100  
+http://127.0.0.1:8000/api/convert?from=RUB&to=qqq&amount=100 
 
 
 ### freecurrencyapi сервис - сторонний сервис
@@ -91,7 +100,6 @@ if __name__ == '__main__':
 ### Конфиг для логирования
 /api/external_currency/config.py
 
-## Развёртывание
-Для локального развёртывания создан файл ...  
+## Развёртывание на сервере
 Для развёртывания на сервере создан файл ...  
 Дописать про action CI/CD  
