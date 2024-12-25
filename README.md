@@ -129,9 +129,6 @@ sudo apt install snapd                                  - установка п�
 sudo snap install core; sudo snap refresh core          - установка и обновление зависимостей для пакетного менеджера snap
 sudo snap install --classic certbot                     - установка certbot
 sudo ln -s /snap/bin/certbot /usr/bin/certbot           - создание ссылки на certbot в системной директории для админа
-sudo certbot --nginx                                    - получите certbot сертификат
-sudo nginx -t
-sudo service nginx reload
 
 ```
 **_Создать на сервере директорию converter:_**
