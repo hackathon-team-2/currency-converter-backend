@@ -3,10 +3,9 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = os.getenv('SECRET_KEY', default='token')
 
-SECRET_KEY = 'django-insecure-ba0*y!y9w&rl1)hez*r3m=-xk642%x=7v+7_g)xw_7(%l_+abe'
-
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'currency-converter-livid-alpha.vercel.app', 'currency-converter.hopto.org']
 
