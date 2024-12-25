@@ -15,7 +15,7 @@
 ДОПИСАТЬ
 
 ### Backend
-Python + Django REST Framework + drf-spectacular + Redis + Celery + Nginx + Docker + GitHub Actions 
+Python + Django REST Framework + drf-spectacular + Redis + Celery + Nginx + Docker + GitHub Actions + Gunicorn
 
 
 
@@ -110,18 +110,91 @@ cd currency_converter/api/pytest_tests/
 ```python
 pytest
 ```
+### _Развернуть проект на удаленном сервере:_
 
-
-## Тестирование
-Для тестирования используется библиотека pytest. Чтобы запустить тесты, перейдите в папку 
-```python
-cd currency_converter/api/pytest_tests/
+**_Клонировать репозиторий:_**
 ```
-и выполните команду:
-```python
-pytest
+git clone https://github.com/hackathon-team-2/currency-converter-backend.git
+```
+**_Установить на сервере Docker, Docker Compose, Nginx и certbot:_**
+```
+sudo apt update
+sudo apt install curl                                   - установка утилиты для скачивания файлов
+curl -fsSL https://get.docker.com -o get-docker.sh      - скачать скрипт для установки
+sh get-docker.sh                                        - запуск скрипта
+sudo apt-get install docker-compose-plugin              - последняя версия docker compose
+sudo apt install nginx                                  - установка nginx
+sudo systemctl start nginx                              - запуск nginx
+sudo apt install snapd                                  - установка пакетного менеджера snap.
+sudo snap install core; sudo snap refresh core          - установка и обновление зависимостей для пакетного менеджера snap
+sudo snap install --classic certbot                     - установка certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot           - создание ссылки на certbot в системной директории для админа
+sudo certbot --nginx                                    - получите certbot сертификат
+sudo nginx -t
+sudo service nginx reload
+
+```
+**_Создать на сервере директорию converter:_**
+```
+mkdir converter
 ```
 
-## Развёртывание на сервере
-Для развёртывания на сервере создан файл ...  
-Дописать про action CI/CD  
+**_Для работы с GitHub Actions необходимо в репозитории в разделе Secrets > Actions создать переменные окружения:_**
+```
+DOCKER_PASSWORD         - пароль от Docker Hub
+DOCKER_USERNAME         - логин Docker Hub
+HOST                    - публичный IP сервера
+USER                    - логин пользователя на сервере
+SSH_KEY                 - приватный ssh-ключ
+SSH_PASSPHRASE          - пароль для ssh-ключа
+TELEGRAM_TO             - ID телеграм-аккаунта для посылки сообщения
+TELEGRAM_TOKEN          - токен бота, посылающего сообщение
+```
+**_На сервере в директории converter создать файл .env и внести туда следующие данные:_**
+```
+POSTGRES_DB             - имя бд
+POSTGRES_USER           - имя пользователя бд
+POSTGRES_PASSWORD       - пароль от бд
+DB_HOST                 - postgres_db
+DB_PORT                 - 5432
+SECRET_KEY              - ваш секретный ключ от приложения
+``` 
+**_На сервере настроить nginx:_**
+1. На сервере в редакторе nano откройте конфиг Nginx:
+```
+sudo nano /etc/nginx/sites-enabled/default
+```
+2. Замените весь код на ваш:
+```
+server {
+    listen 80;
+    index index.html;
+    server_tokens off;
+    server_name currency-converter.hopto.org;
+    server_name currency-converter-livid-alpha.vercel.app;
+
+    location / {
+        proxy_set_header Host $http_host;
+        proxy_pass http://127.0.0.1:8000;
+    }
+}
+```
+3. Убедитесь, что в конфиге нет ошибок и перезапустите nginx:
+```
+sudo nginx -t
+sudo service nginx reload
+```
+4. Получите ssl сертификат:
+```
+sudo certbot --nginx
+sudo nginx -t
+sudo service nginx reload
+```
+### После каждого обновления репозитория (push в ветку main) будет происходить:
+
+1. Проверка кода на соответствие стандарту PEP8 (с помощью пакета flake8)
+2. Сборка и доставка докер-образов backend и gateway на Docker Hub
+3. Разворачивание проекта на удаленном сервере
+4. Отправка сообщения в Telegram в случае успеха
+
+Проект доступен по адресу: https://currency-converter.hopto.org/schema/swagger-ui/
