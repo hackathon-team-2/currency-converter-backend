@@ -4,8 +4,10 @@ from drf_spectacular.views import (SpectacularAPIView, SpectacularRedocView,
 
 from api import views
 
+app_name = 'api'
+
 urlpatterns = [
-    path('convert/', views.CurrencyView.as_view()),
+    path('convert/', views.CurrencyView.as_view(), name='convert'),
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
     path(
         'schema/swagger-ui/',
