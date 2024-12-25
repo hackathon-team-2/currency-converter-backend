@@ -8,7 +8,7 @@ SECRET_KEY = 'django-insecure-ba0*y!y9w&rl1)hez*r3m=-xk642%x=7v+7_g)xw_7(%l_+abe
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'currency-converter-livid-alpha.vercel.app', 'currency-converter.hopto.org']
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
