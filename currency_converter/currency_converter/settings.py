@@ -11,8 +11,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
 
 DEBUG = os.getenv('DEBUG_STATUS', 'False') == 'True'
-print(DEBUG)
-
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
@@ -31,6 +29,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'users',
     'api',
+    'external_currency',
 ]
 
 MIDDLEWARE = [
@@ -135,7 +134,4 @@ SPECTACULAR_SETTINGS = {
 
 # CORS_ORIGIN_ALLOW_ALL = True
 CORS_URLS_REGEX = r'^/api/.*$'
-CORS_ALLOWED_ORIGINS = [
-    'http://currency-converter-livid-alpha.vercel.app/',
-    'https://currency-converter-livid-alpha.vercel.app/',
-]
+CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', '').split(',')
