@@ -30,9 +30,9 @@ class CurrencyView(APIView):
 
         from_cache = cache.get(from_param)
         to_cache = cache.get(to_param)
-        # Проверяем, есть ли нужные значения в кеше:
+        # Проверяем, есть ли нужные значения в кэше:
         # Если нет, то отправляем запрос к апи
-        if None in [from_cache, to_cache]:
+        if from_cache and to_cache:
             result = convert(
                 from_param, to_param, amount_param
             )
