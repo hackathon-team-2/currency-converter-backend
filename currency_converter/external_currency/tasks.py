@@ -1,8 +1,9 @@
 from celery import shared_task
 from django.core.cache import cache
 
-from .constants import AVAILABLE_CURRENCY
-from .external_currency.freecurrencyapi import get_api_answer
+from currency_converter.constants import AVAILABLE_CURRENCY
+
+from .freecurrencyapi import get_api_answer
 
 
 @shared_task

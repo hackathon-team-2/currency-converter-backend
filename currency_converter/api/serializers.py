@@ -2,7 +2,7 @@ from typing import Union
 
 from rest_framework import serializers
 
-from api.constants import AVAILABLE_CURRENCY
+from currency_converter.constants import AVAILABLE_CURRENCY
 
 
 class CurrencySerializer(serializers.Serializer):

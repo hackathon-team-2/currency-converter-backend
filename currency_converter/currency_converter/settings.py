@@ -2,14 +2,17 @@ import os
 from pathlib import Path
 
 from django.core.management.utils import get_random_secret_key
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
 
-DEBUG = False
+DEBUG = os.getenv('DEBUG_STATUS', 'False') == 'True'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'currency-converter-livid-alpha.vercel.app', 'currency-converter.hopto.org']
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
@@ -20,12 +23,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_celery_beat',
-    'rest_framework',
     'corsheaders',
+    'django_celery_beat',
     'drf_spectacular',
+    'rest_framework',
     'users',
     'api',
+    'external_currency',
 ]
 
 MIDDLEWARE = [
@@ -72,11 +76,11 @@ DATABASES = {
 }
 
 CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://redis_container:6379/1",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://redis_container:6379/1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
 }
@@ -130,7 +134,4 @@ SPECTACULAR_SETTINGS = {
 
 # CORS_ORIGIN_ALLOW_ALL = True
 CORS_URLS_REGEX = r'^/api/.*$'
-CORS_ALLOWED_ORIGINS = [
-    'http://currency-converter-livid-alpha.vercel.app/',
-    'https://currency-converter-livid-alpha.vercel.app/',
-]
+CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', '').split(',')

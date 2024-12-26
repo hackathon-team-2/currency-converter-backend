@@ -5,11 +5,11 @@ from decimal import Decimal
 from http import HTTPStatus
 from typing import Union
 
-import exceptions
 import requests
+from django.core.cache import cache
 from dotenv import load_dotenv
-
-from api.external_currency.config import logger
+from external_currency import exceptions
+from external_currency.config import logger
 
 load_dotenv()
 
@@ -87,6 +87,8 @@ def convert(out: str, to: str, value: Union[int, float]) -> Decimal:
     Returns:
         decimal: результат перевода
     """
+    if cache.get(out) and cache.get(to):
+        return get_decimal(cache.get(out), cache.get(to), value)
 
     rates = get_api_answer('latest')['data']
     if out not in rates:
@@ -97,4 +99,4 @@ def convert(out: str, to: str, value: Union[int, float]) -> Decimal:
         error_message = f'Нет валюты {to}'
         logger.error(error_message)
         raise exceptions.NoCurrency(error_message)
-    return get_decimal(rates.get(to), rates.get(out), value)
+    return get_decimal(rates.get(out), rates.get(to), value)

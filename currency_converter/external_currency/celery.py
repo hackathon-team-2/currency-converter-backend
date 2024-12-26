@@ -1,3 +1,4 @@
+"""Модуль для настройки celery."""
 import os
 from datetime import timedelta
 
@@ -14,12 +15,14 @@ app.autodiscover_tasks()
 
 @app.on_after_configure.connect
 def setup_load_currencies(sender, **kwargs):
-    sender.send_task('api.tasks.load_currencies')
+    sender.send_task(
+        'external_currency.tasks.load_currencies'
+    )
 
 
 app.conf.beat_schedule = {
-    "load_currencies": {
-        "task": 'api.tasks.load_currencies',
-        "schedule": timedelta(hours=4),
+    'load_currencies': {
+        'task': 'external_currency.tasks.load_currencies',
+        'schedule': timedelta(hours=4),
     },
 }
