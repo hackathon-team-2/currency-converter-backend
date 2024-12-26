@@ -18,8 +18,8 @@ def setup_load_currencies(sender, **kwargs):
 
 
 app.conf.beat_schedule = {
-    "load_currencies": {
-        "task": 'api.tasks.load_currencies',
-        "schedule": timedelta(hours=4),
+    'load_currencies': {
+        'task': 'api.tasks.load_currencies',
+        'schedule': timedelta(hours=4),
     },
 }
