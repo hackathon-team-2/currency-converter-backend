@@ -1,9 +1,8 @@
-from rest_framework import status
 from drf_spectacular.utils import (OpenApiParameter, extend_schema,
                                    extend_schema_view)
+from rest_framework import status
 
 from api.serializers import CurrencySerializer
-
 
 currency = extend_schema_view(
     get=extend_schema(

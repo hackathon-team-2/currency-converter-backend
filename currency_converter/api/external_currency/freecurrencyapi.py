@@ -5,11 +5,11 @@ from decimal import Decimal
 from http import HTTPStatus
 from typing import Union
 
+import exceptions
 import requests
 from dotenv import load_dotenv
 
 from api.external_currency.config import logger
-import exceptions
 
 load_dotenv()
 
