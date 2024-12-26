@@ -16,16 +16,27 @@ APIKEY = os.getenv('APIKEY')
 
 HEADERS = {'apikey': APIKEY}
 
-"""Некоторые методы сервиса, нужные для работы."""
 ENDPOINTS = {
     'latest': 'https://api.freecurrencyapi.com/v1/latest',
     'status': 'https://api.freecurrencyapi.com/v1/status',
 }
+"""Методы сервиса, нужные для работы:
+
+latest - возвращает последний курс валют по USD
+status - возвращает статус по бесплатной лицензии
+
+"""
 
 
 def get_api_answer(endpoint: str) -> dict:
-    """
-    Обращается по методу сервиса и выдаёт данные.
+    """Обращается по методу сервиса и выдаёт данные.
+
+    Args:
+        endpoint (str): метод сервиса
+
+    Returns:
+        dict: json-словарь
+
     """
     try:
         response = requests.get(
@@ -49,12 +60,31 @@ def get_api_answer(endpoint: str) -> dict:
 
 def get_decimal(out: Union[int, float], to: Union[int, float],
                 value: Union[int, float]) -> Decimal:
-    """Производит расчет стоимости валюты."""
+    """Производит расчет стоимости валюты.
+
+    Args:
+        out (int | float): значение валюты, из которой первести
+        to (int | float): значение валюты, в которую первести
+        value (int | float): количество для перевода
+
+    Returns:
+        decimal: результат расчёта
+    """
     return Decimal(to) / Decimal(out) * Decimal(value)
 
 
 def convert(out: str, to: str, value: Union[int, float]) -> Decimal:
-    """Конвертирует по текущему курсу."""
+    """Конвертирует по текущему курсу.
+
+    Args:
+        out (str): валюта, из которой первести
+        to (str): валюта, в которую первести
+        value (int | float): количество для перевода
+
+    Returns:
+        decimal: результат перевода
+    """
+
     rates = get_api_answer('latest')['data']
     if out not in rates:
         error_message = f'Нет валюты {out}'
