@@ -46,7 +46,7 @@ services:
   celery_worker:
     build: ./currency_converter/
     container_name: celery_worker_container
-    command: celery -A currency_converter worker --loglevel=info
+    command: celery -A external_currency worker --loglevel=info
     env_file: .env
     depends_on:
       - redis
@@ -56,7 +56,7 @@ services:
   celery_beat:
     build: ./currency_converter/
     container_name: celery_beat_container
-    command: celery -A currency_converter beat --loglevel=info
+    command: celery -A external_currency beat --loglevel=info
     env_file: .env
     volumes: 
       - pg_data:/var/lib/postgresql/data
