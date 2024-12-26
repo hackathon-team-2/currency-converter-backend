@@ -110,13 +110,10 @@ cd currency_converter/api/pytest_tests/
 ```python
 pytest
 ```
-### _Развернуть проект на удаленном сервере:_
 
-**_Клонировать репозиторий:_**
-```
-git clone https://github.com/hackathon-team-2/currency-converter-backend.git
-```
-**_Установить на сервере Docker, Docker Compose, Nginx и certbot:_**
+## Разворачивание проекта на удаленном сервере:
+### Выполненные задачи для настройки сервера:
+**Установить на сервере Docker, Docker Compose, Nginx и certbot:**
 ```
 sudo apt update
 sudo apt install curl                                   - установка утилиты для скачивания файлов
@@ -131,12 +128,12 @@ sudo snap install --classic certbot                     - установка cer
 sudo ln -s /snap/bin/certbot /usr/bin/certbot           - создание ссылки на certbot в системной директории для админа
 
 ```
-**_Создать на сервере директорию converter:_**
+**Создать на сервере директорию converter:**
 ```
 mkdir converter
 ```
 
-**_Для работы с GitHub Actions необходимо в репозитории в разделе Secrets > Actions создать переменные окружения:_**
+**Для работы с GitHub Actions необходимо в репозитории в разделе Secrets > Actions создать переменные окружения:**
 ```
 DOCKER_PASSWORD         - пароль от Docker Hub
 DOCKER_USERNAME         - логин Docker Hub
@@ -147,7 +144,7 @@ SSH_PASSPHRASE          - пароль для ssh-ключа
 TELEGRAM_TO             - ID телеграм-аккаунта для посылки сообщения
 TELEGRAM_TOKEN          - токен бота, посылающего сообщение
 ```
-**_На сервере в директории converter создать файл .env и внести туда следующие данные:_**
+**На сервере в директории converter создать файл .env и внести туда следующие данные:**
 ```
 POSTGRES_DB             - имя бд
 POSTGRES_USER           - имя пользователя бд
@@ -156,7 +153,7 @@ DB_HOST                 - postgres_db
 DB_PORT                 - 5432
 SECRET_KEY              - ваш секретный ключ от приложения
 ``` 
-**_На сервере настроить nginx:_**
+**На сервере настроить nginx:**
 1. На сервере в редакторе nano откройте конфиг Nginx:
 ```
 sudo nano /etc/nginx/sites-enabled/default
@@ -186,6 +183,10 @@ sudo service nginx reload
 sudo certbot --nginx
 sudo nginx -t
 sudo service nginx reload
+```
+**Склонируйте репозиторий:**
+```
+git clone https://github.com/hackathon-team-2/currency-converter-backend.git
 ```
 ### После каждого обновления репозитория (push в ветку main) будет происходить:
 
