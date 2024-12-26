@@ -25,10 +25,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_celery_beat',
-    'rest_framework',
     'corsheaders',
+    'django_celery_beat',
     'drf_spectacular',
+    'rest_framework',
     'users',
     'api',
 ]
