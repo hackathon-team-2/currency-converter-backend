@@ -73,7 +73,7 @@ docker compose exec backend python manage.py createsuperuser
 
 ## Структура проекта
 
-### Приложение api - сервис для конвертации валюты
+* **Приложение api - сервис для конвертации валюты**
 - Вью для get-запроса и обработки параметров  
 - Сериализатор для проверки параметров: наличие, соответствие    
 
@@ -103,7 +103,7 @@ http://127.0.0.1:8000/api/convert?from=RUB&to=eur&amount=5.5
 http://127.0.0.1:8000/api/convert?from=rub&to=qqq&amount=100   
 
 
-### Freecurrencyapi - сторонний api-сервис, предоставляющий информацию о стоимости валют
+* **Freecurrencyapi - сторонний api-сервис, предоставляющий информацию о стоимости валют**
 Реализация интеграции с сервисом находится в файле api/external_currency/freecurrencyapi.py  
 Чтобы отдельно протестировать работу сервиса:
 1. Допишите в конце файла:  
@@ -121,14 +121,14 @@ python api/external_currency/freecurrencyapi.py
 Для подключения к freecurrencyapi нужен apikey, бесплатный тариф имеет ограничения:   
 "5k Free Monthly Requests + 32 World Currencies + All exchange rates are updated on a daily basis".  
 
-### Конфиг для логирования
+* **Конфиг для логирования**
 /api/external_currency/config.py
 
-### Связь фронта с бэком:
+* **Связь фронта с бэком**:
 Для связи фронта с бэкендом на удалённом сервере настроен nginx для обеспечения cors-политики.
 
 ## Развертывание проекта на удаленном сервере:
-# ### Выполненные задачи для настройки сервера ###:
+### Выполненные задачи для настройки сервера:
 **Установить на сервере Docker, Docker Compose, Nginx и certbot:**
 ```
 sudo apt update
