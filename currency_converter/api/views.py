@@ -32,7 +32,7 @@ class CurrencyView(APIView):
         )
         return Response(
             {
-                'query': request.query_params,
-                'result': result
+                # 'query': request.query_params,
+                'rate': result
             }
         )
