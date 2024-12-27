@@ -21,7 +21,7 @@ class CurrencySerializer(serializers.Serializer):
     def validate(self, data: dict) -> dict:
         out = self.context['params'].get('from')
         to = self.context['params'].get('to')
-        amount = self.context['params'].get('amount')
+        amount = (self.context['params'].get('amount')).replace(',', '.')
         # проверяем наличие параметра: валюта из
         if not out:
             raise serializers.ValidationError('Введите параметр from')
@@ -39,7 +39,7 @@ class CurrencySerializer(serializers.Serializer):
             raise serializers.ValidationError('Введите параметр amount')
         # проверяем тип и значение = число > 0
         try:
-            float(amount.replace(',', '.'))
+            float(amount)
         except ValueError:
             raise serializers.ValidationError(
                 'Количество должно быть числом')

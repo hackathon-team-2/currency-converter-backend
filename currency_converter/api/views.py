@@ -25,7 +25,7 @@ class CurrencyView(APIView):
 
         from_param = request.query_params['from'].upper()
         to_param = request.query_params['to'].upper()
-        amount_param = request.query_params['amount'].replace(',', '.')
+        amount_param = request.query_params['amount']
 
         result = convert(
             from_param, to_param, amount_param
