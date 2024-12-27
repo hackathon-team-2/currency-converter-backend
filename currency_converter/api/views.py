@@ -30,12 +30,12 @@ class CurrencyView(APIView):
         result = convert(
             from_param, to_param, amount_param
         )
-        return Response( 
-            { 
-                'info': { 
-                    'rate': result/int(amount_param), 
-                }, 
-                'query': request.query_params, 
-                'result': result 
+        return Response(
+            {
+                'info': {
+                    'rate': result/int(amount_param),
+                },
+                'query': request.query_params,
+                'result': result
             }
         )
