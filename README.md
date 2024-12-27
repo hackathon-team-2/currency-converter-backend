@@ -29,7 +29,7 @@
 ### Frontend
 HTML5, JavaScript ES6, Sass / SCSS
 ### Backend
-Python, Django REST Framework, drf-spectacular, Redis, Celery, Nginx, Docker, GitHub Actions, Gunicorn
+Python, Django REST Framework, drf-spectacular, Redis, Celery, Nginx, Docker, GitHub Actions, Gunicorn, corsheaders
 
 
 ## Локальный запуск проекта
