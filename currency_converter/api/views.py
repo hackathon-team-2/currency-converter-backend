@@ -33,7 +33,7 @@ class CurrencyView(APIView):
         return Response(
             {
                 'info': {
-                    'rate': result/int(amount_param),
+                    'rate': result/float(amount_param),
                 },
                 'query': request.query_params,
                 'result': result
