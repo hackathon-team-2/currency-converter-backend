@@ -3,7 +3,6 @@
 import os
 from decimal import Decimal
 from http import HTTPStatus
-from typing import Union
 
 import requests
 from django.core.cache import cache
@@ -61,14 +60,14 @@ def get_api_answer(endpoint: str) -> dict:
         raise exceptions.NoJSON(error_message)
 
 
-def get_decimal(out: Union[int, float], to: Union[int, float],
-                value: Union[int, float]) -> Decimal:
+def get_decimal(out: str, to: str,
+                value: str) -> Decimal:
     """Производит расчет стоимости валюты.
 
     Args:
-        out (int | float): значение валюты, из которой первести
-        to (int | float): значение валюты, в которую первести
-        value (int | float): количество для перевода
+        out (str): значение валюты, из которой первести
+        to (str): значение валюты, в которую первести
+        value (str): количество для перевода
 
     Returns:
         decimal: результат расчёта
@@ -76,13 +75,13 @@ def get_decimal(out: Union[int, float], to: Union[int, float],
     return Decimal(to) / Decimal(out) * Decimal(value)
 
 
-def convert(out: str, to: str, value: Union[int, float]) -> Decimal:
+def convert(out: str, to: str, value: str) -> Decimal:
     """Конвертирует по текущему курсу.
 
     Args:
         out (str): валюта, из которой первести
         to (str): валюта, в которую первести
-        value (int | float): количество для перевода
+        value (str): количество для перевода
 
     Returns:
         decimal: результат перевода
@@ -95,7 +94,7 @@ def convert(out: str, to: str, value: Union[int, float]) -> Decimal:
         error_message = f'Нет валюты {out}'
         logger.error(error_message)
         raise exceptions.NoCurrency(error_message)
-    if rates.get(out) == 0 or value == 0:
+    if rates.get(out) == '0' or value == '0':
         error_message = 'Такой расчёт невозможен'
         logger.error(error_message)
         raise exceptions.DividedValueIsNull(error_message)
