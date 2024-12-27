@@ -131,5 +131,3 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
 }
-
-# CORS_ALLOWED_ORIGINS = 'https://currency-converter-livid-alpha.vercel.app'

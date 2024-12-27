@@ -124,6 +124,9 @@ python api/external_currency/freecurrencyapi.py
 ### Конфиг для логирования
 /api/external_currency/config.py
 
+### Связь фронта с бэком:
+Для связи фронта с бэкендом на удалённом сервере настроен nginx для обеспечения cors-политики.
+
 ## Развертывание проекта на удаленном сервере:
 # ### Выполненные задачи для настройки сервера ###:
 **Установить на сервере Docker, Docker Compose, Nginx и certbot:**
@@ -187,7 +190,7 @@ server {
 
 }
 ```
-Вместо currency-converter.hopto.org или currency-converter-livid-alpha.vercel.app подставьте свой домен
+Вместо currency-converter.hopto.org или currency-converter-livid-alpha.vercel.app подставьте свой рабочий домен
 
 3. Убедитесь, что в конфиге нет ошибок и перезапустите nginx:
 ```
