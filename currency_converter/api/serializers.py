@@ -41,7 +41,8 @@ class CurrencySerializer(serializers.Serializer):
         try:
             float(amount)
         except ValueError:
-            raise serializers.ValidationError('Количество должно быть числом')
+            raise serializers.ValidationError(
+                'Количество должно быть числом')
         if float(amount) <= 0:
             raise serializers.ValidationError(
                 'Количество должно быть больше 0')

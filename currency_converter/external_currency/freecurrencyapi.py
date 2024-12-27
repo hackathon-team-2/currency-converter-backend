@@ -95,10 +95,10 @@ def convert(out: str, to: str, value: Union[int, float]) -> Decimal:
         error_message = f'Нет валюты {out}'
         logger.error(error_message)
         raise exceptions.NoCurrency(error_message)
-    if rates.get(out) == 0:
+    if rates.get(out) == 0 or value == 0:
         error_message = 'Такой расчёт невозможен'
         logger.error(error_message)
-        raise exceptions.ValueToIsNull(error_message)
+        raise exceptions.DividedValueIsNull(error_message)
     if to not in rates:
         error_message = f'Нет валюты {to}'
         logger.error(error_message)

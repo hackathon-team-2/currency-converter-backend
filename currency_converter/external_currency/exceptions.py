@@ -21,6 +21,6 @@ class NoJSON(Exception):
     pass
 
 
-class ValueToIsNull(Exception):
+class DividedValueIsNull(Exception):
     """We cannot devide into 0."""
     pass
