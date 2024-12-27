@@ -215,7 +215,7 @@ git clone https://github.com/hackathon-team-2/currency-converter-backend.git
 3. Разворачивание проекта на удаленном сервере
 4. Отправка сообщения в Telegram в случае успеха
 
-### Чтобы создать суперпользователя, после запуска проекта в директории /converter выполните команду:
+### Чтобы создать суперпользователя, после запуска проекта на сервере в директории /converter выполните команду:
 ```
 sudo docker compose -f docker-compose.production.yml exec backend python manage.py createsuperuser
 ```
