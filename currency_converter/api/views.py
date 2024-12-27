@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from external_currency.freecurrencyapi import convert
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -25,7 +27,7 @@ class CurrencyView(APIView):
 
         from_param = request.query_params['from'].upper()
         to_param = request.query_params['to'].upper()
-        amount_param = request.query_params['amount']
+        amount_param = (request.query_params['amount']).replace(',', '.')
 
         result = convert(
             from_param, to_param, amount_param
@@ -33,7 +35,7 @@ class CurrencyView(APIView):
         return Response(
             {
                 'info': {
-                    'rate': result/int(amount_param),
+                    'rate': result/Decimal(amount_param),
                 },
                 'query': request.query_params,
                 'result': result

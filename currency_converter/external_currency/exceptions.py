@@ -19,3 +19,8 @@ class NoCurrency(Exception):
 class NoJSON(Exception):
     """Raise when there's not a json-format."""
     pass
+
+
+class DividedValueIsNull(Exception):
+    """We cannot devide into 0."""
+    pass
