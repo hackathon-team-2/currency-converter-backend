@@ -221,6 +221,6 @@ sudo docker compose -f docker-compose.production.yml exec backend python manage.
 ```
 
 ## Проект доступен по адресам:
-https://currency-converter.hopto.org/schema/swagger-ui/       - Swagger документация 
-https://currency-converter-livid-alpha.vercel.app/            - Готовый проект, связанный с фронтом
-https://currency-converter.hopto.org/admin/                   - Админка, в которой можно управлять периодическими задачами
+https://currency-converter.hopto.org/schema/swagger-ui/       - Swagger документация                          
+https://currency-converter-livid-alpha.vercel.app/            - Готовый проект, связанный с фронтом                        
+https://currency-converter.hopto.org/admin/                   - Админка, в которой можно управлять периодическими задачами                             
