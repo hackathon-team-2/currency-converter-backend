@@ -39,7 +39,7 @@ class CurrencySerializer(serializers.Serializer):
             raise serializers.ValidationError('Введите параметр amount')
         # проверяем тип и значение = число > 0
         try:
-            float(amount)
+            float(amount.replace(',', '.'))
         except ValueError:
             raise serializers.ValidationError(
                 'Количество должно быть числом')
