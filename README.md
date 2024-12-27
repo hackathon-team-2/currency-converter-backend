@@ -78,47 +78,54 @@ docker compose exec backend python manage.py createsuperuser
 - Сериализатор для проверки параметров: наличие, соответствие    
 
 Запрос:  
-```python
-http://127.0.0.1:8000/api/convert?from=USD&to=RUB&amount=25000
+```
+http://127.0.0.1:8000/api/convert?from=USD&to=RUB&amount=125
 ```
   
 Ответ:  
-```python
+```json
 {
+  "info": {
+    "rate": 100.0191775342
+  },
   "query": {
+    "amount": "125",
     "from": "USD",
-    "to": "RUB",
-    "amount": 25000
-   },
-  "result": 2590593.3413124997
-}  
+    "to": "RUB"
+  },
+  "result": 12502.397191775
+} 
 ```
-Примеры для тестирования сервиса:  
+Примеры запросов для тестирования сервиса:  
 http://127.0.0.1:8000/api/convert?from=USD&to=EUR&amount=100  
 http://127.0.0.1:8000/api/convert?from=rub&to=USD&amount=100  
-http://127.0.0.1:8000/api/convert?from=RUB&to=eur&amount=100  
-http://127.0.0.1:8000/api/convert?from=rub&to=qqq&amount=100  
-http://127.0.0.1:8000/api/convert?from=RUB&to=qqq&amount=100 
+http://127.0.0.1:8000/api/convert?from=RUB&to=eur&amount=5.5   
+http://127.0.0.1:8000/api/convert?from=rub&to=qqq&amount=100   
 
 
-### freecurrencyapi сервис - сторонний сервис
-Реализация в файле api/external_currency/freecurrencyapi.py  
-Чтобы протестировать работу сервиса, допишите в конце файла:  
+### Freecurrencyapi - сторонний api-сервис, предоставляющий информацию о стоимости валют
+Реализация интеграции с сервисом находится в файле api/external_currency/freecurrencyapi.py  
+Чтобы отдельно протестировать работу сервиса:
+1. Допишите в конце файла:  
 ```python
 if __name__ == '__main__':
     result = convert('RUB', 'EUR', 10000)
     print(result)
 ```
-Запустите файл.
+2. Запустите файл:
+```bash
+python api/external_currency/freecurrencyapi.py
+```
 
 Документация на сервис - https://freecurrencyapi.com/docs/  
-Для подключения нужен apikey, бесплатный тариф имеет ограничения: "5k Free Monthly Requests + 32 World Currencies + All exchange rates are updated on a daily basis".  
+Для подключения к freecurrencyapi нужен apikey, бесплатный тариф имеет ограничения:   
+"5k Free Monthly Requests + 32 World Currencies + All exchange rates are updated on a daily basis".  
 
 ### Конфиг для логирования
 /api/external_currency/config.py
 
 ## Развертывание проекта на удаленном сервере:
-### Выполненные задачи для настройки сервера:
+# ### Выполненные задачи для настройки сервера ###:
 **Установить на сервере Docker, Docker Compose, Nginx и certbot:**
 ```
 sudo apt update
@@ -150,39 +157,43 @@ SSH_PASSPHRASE          - пароль для ssh-ключа
 TELEGRAM_TO             - ID телеграм-аккаунта для посылки сообщения
 TELEGRAM_TOKEN          - токен бота, посылающего сообщение
 ```
-**На сервере в директории converter создать файл .env и внести туда следующие данные:**
+**На сервере в директории converter создать файл .env и внести туда ваши данные по примеру из .env.example:**
+Учтите, что
 ```
-POSTGRES_DB             - имя бд
-POSTGRES_USER           - имя пользователя бд
-POSTGRES_PASSWORD       - пароль от бд
-DB_HOST                 - postgres_db
-DB_PORT                 - 5432
-SECRET_KEY              - ваш секретный ключ от приложения
-``` 
+DB_HOST='postgres_db'         - должен совпадать с названием сервиса postgres_db в docker-compose
+```
+ 
 **На сервере настроить nginx:**
 1. На сервере в редакторе nano откройте конфиг Nginx:
 ```
 sudo nano /etc/nginx/sites-enabled/default
 ```
-2. Замените весь код на ваш:
+2. Замените весь код в файле на этот:
 ```
 server {
-    listen 80;
     index index.html;
     server_tokens off;
     server_name currency-converter.hopto.org;
     server_name currency-converter-livid-alpha.vercel.app;
 
+
+
     location / {
+        add_header 'Access-Control-Allow-Origin' '*';
+        add_header 'Access-Control-Allow-Methods' 'GET';
         proxy_set_header Host $http_host;
         proxy_pass http://127.0.0.1:8000;
     }
+
 }
 ```
+Вместо currency-converter.hopto.org или currency-converter-livid-alpha.vercel.app подставьте свой домен
+
 3. Убедитесь, что в конфиге нет ошибок и перезапустите nginx:
 ```
 sudo nginx -t
 sudo service nginx reload
+sudo systemctl restart nginx
 ```
 4. Получите ssl сертификат:
 ```
@@ -190,7 +201,7 @@ sudo certbot --nginx
 sudo nginx -t
 sudo service nginx reload
 ```
-**Склонируйте репозиторий:**
+**Склонируйте репозиторий на локальный компьютер:**
 ```
 git clone https://github.com/hackathon-team-2/currency-converter-backend.git
 ```
@@ -201,4 +212,12 @@ git clone https://github.com/hackathon-team-2/currency-converter-backend.git
 3. Разворачивание проекта на удаленном сервере
 4. Отправка сообщения в Telegram в случае успеха
 
-Проект доступен по адресу: https://currency-converter.hopto.org/schema/swagger-ui/
+### Чтобы создать суперпользователя, после запуска проекта в директории /converter выполните команду:
+```
+sudo docker compose -f docker-compose.production.yml exec backend python manage.py createsuperuser
+```
+
+## Проект доступен по адресам:
+https://currency-converter.hopto.org/schema/swagger-ui/       - Swagger документация 
+https://currency-converter-livid-alpha.vercel.app/            - Готовый проект, связанный с фронтом
+https://currency-converter.hopto.org/admin/                   - Админка, в которой можно управлять периодическими задачами
