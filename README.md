@@ -1,28 +1,43 @@
-# Проект: 
-Сервис для конвертации валют.  
+# Backend проекта "Сервис для конвертации валют"
+
+Создание API и веб-приложения для конвертации валют с использованием актуальных данных о курсах валют от стороннего API.
+
+Даты проведения: 3 декабря - 28 декабря 2024 года.
+
+Организатор: АНО ДПО «Образовательные технологии Яндекса» (Яндекс.Практикум)
+
+[Подробная информация о Хакатоне](https://docs.google.com/document/d/1nQz2IvNutPv28m0HGASbrWm13tV1RCPeAaySq19uk1w/edit?tab=t.0)
+
+### Опубликованное приложение
+
+[Ссылка на сайт](https://currency-converter-livid-alpha.vercel.app/)
+
+[Фронтенд приложения](https://github.com/hackathon-team-2/currency-converter-frontend)
+
+[Бэкенд приложения](https://github.com/hackathon-team-2/currency-converter-backend)
+
+[Макет в Figma](https://www.figma.com/design/PHxF5BGFK2kv0NvCDQu1xE/%D0%9A%D0%BE%D0%BD%D0%B2%D0%B5%D1%80%D1%82%D0%B5%D1%80?node-id=1-3&t=hhRhzISQrox11Nxz-0)
 
 ## Содержание
 - [Технологии](#технологии)
-- [Запуск проекта](#запуск-проекта)
+- [Локальный запуск проекта](#локальный-запуск-проекта)
 - [Структура проекта](#структура-проекта)
-- [Тестирование проекта](#тестирование-проекта)
-- [Развёртывание](#развёртывание)
-
+- [Развёртывание](#развертывание-проекта-на-удаленном-сервере)
 
 
 ## Технологии:
 ### Frontend
 ДОПИСАТЬ
-
+HTML5, JavaScript ES6, Sass / SCSS
 ### Backend
-Python + Django REST Framework + drf-spectacular + Redis + Celery + Nginx + Docker + GitHub Actions + Gunicorn
-
+Python, Django REST Framework, drf-spectacular, Redis, Celery, Nginx, Docker, GitHub Actions, Gunicorn
 
 
 ## Локальный запуск проекта
-1. Склонируйте проекта с git-репозитория 
+1. Склонируйте проекта с git-репозитория и перейдите в корневую директорию проекта:
 ```bash
 git clone https://github.com/hackathon-team-2/currency-converter-backend.git
+cd currency-converter-backend
 ```
 2. Используйте .env.example и сделайте свой .env. 
 APIKEY-токен можно получить здесь - https://freecurrencyapi.com/                
@@ -101,7 +116,7 @@ if __name__ == '__main__':
 ### Конфиг для логирования
 /api/external_currency/config.py
 
-## Разворачивание проекта на удаленном сервере:
+## Развертывание проекта на удаленном сервере:
 ### Выполненные задачи для настройки сервера:
 **Установить на сервере Docker, Docker Compose, Nginx и certbot:**
 ```

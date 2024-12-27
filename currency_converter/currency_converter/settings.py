@@ -132,7 +132,5 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
 }
 
-# CORS_ORIGIN_ALLOW_ALL = True
-# CORS_URLS_REGEX = r'^/api/.*$'
-# CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', 'http://localhost:5173,http://127.0.0.1:5173').split(',')
-CORS_ALLOWED_ORIGINS = 'https://currency-converter-livid-alpha.vercel.app'
+CORS_ALLOWED_ORIGINS = ['https://currency-converter-livid-alpha.vercel.app',]
+CORS_ALLOWED_ORIGINS = [os.getenv('CORS_ALLOWED_ORIGINS'),]
