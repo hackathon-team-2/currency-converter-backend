@@ -1,7 +1,5 @@
 # Backend проекта "Сервис для конвертации валют"
 
-(Готовый проект находится в ветке develop)
-
 Создание API и веб-приложения для конвертации валют с использованием актуальных данных о курсах валют от стороннего API.
 
 Даты проведения: 3 декабря - 28 декабря 2024 года.
@@ -181,7 +179,6 @@ server {
     server_name currency-converter.hopto.org;
 
 
-
     location / {
         add_header 'Access-Control-Allow-Origin' '*';
         add_header 'Access-Control-Allow-Methods' 'GET';
@@ -192,6 +189,7 @@ server {
 }
 ```
 Вместо currency-converter.hopto.org подставьте свой рабочий домен
+
 
 3. Убедитесь, что в конфиге нет ошибок и перезапустите nginx:
 ```
