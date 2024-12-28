@@ -12,7 +12,7 @@
 
 ### Опубликованное приложение
 
-[Ссылка на сайт](https://currency-converter-livid-alpha.vercel.app/)
+[Ссылка на сайт](https://currency-converter-team2.vercel.app/)
 
 [Фронтенд приложения](https://github.com/hackathon-team-2/currency-converter-frontend)
 
