@@ -179,7 +179,6 @@ server {
     index index.html;
     server_tokens off;
     server_name currency-converter.hopto.org;
-    server_name currency-converter-livid-alpha.vercel.app;
 
 
 
@@ -192,7 +191,7 @@ server {
 
 }
 ```
-Вместо currency-converter.hopto.org или currency-converter-livid-alpha.vercel.app подставьте свой рабочий домен
+Вместо currency-converter.hopto.org подставьте свой рабочий домен
 
 3. Убедитесь, что в конфиге нет ошибок и перезапустите nginx:
 ```
