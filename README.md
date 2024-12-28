@@ -177,8 +177,6 @@ server {
     index index.html;
     server_tokens off;
     server_name currency-converter.hopto.org;
-    server_name currency-converter-livid-alpha.vercel.app;
-
 
 
     location / {
@@ -190,7 +188,8 @@ server {
 
 }
 ```
-Вместо currency-converter.hopto.org или currency-converter-livid-alpha.vercel.app подставьте свой рабочий домен
+Вместо currency-converter.hopto.org подставьте свой рабочий домен
+
 
 3. Убедитесь, что в конфиге нет ошибок и перезапустите nginx:
 ```
@@ -222,5 +221,5 @@ sudo docker compose -f docker-compose.production.yml exec backend python manage.
 
 ## Проект доступен по адресам:
 https://currency-converter.hopto.org/schema/swagger-ui/       - Swagger документация                          
-https://currency-converter-team2.vercel.app/                            - Готовый проект, связанный с фронтом                        
-https://currency-converter.hopto.org/admin/                              - Админка, в которой можно управлять периодическими задачами                             
+https://currency-converter-livid-alpha.vercel.app/            - Готовый проект, связанный с фронтом                        
+https://currency-converter.hopto.org/admin/                   - Админка, в которой можно управлять периодическими задачами                             
